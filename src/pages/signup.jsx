@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import UserIcon from "../assets/user-icon.png";
 import { BiShow, BiHide } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const signup = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     firstName: "",
@@ -30,11 +31,12 @@ const signup = () => {
         body: JSON.stringify(data),
       }
     )
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((data) => console.log(data));
     // const dataRes = await fetchData.json();
-    // console.log(dataRes);
-    // alert("Successfull");
+
+    alert(data.message);
+    navigate("/login");
   };
 
   const handleOnChange = (e) => {

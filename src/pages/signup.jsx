@@ -35,8 +35,12 @@ const signup = () => {
     // .catch((err) => console.log(err));
     const dataRes = await fetchData.json();
     console.log(dataRes);
-    alert(dataRes.message);
-    navigate("/login");
+    if (dataRes.id) {
+      alert(dataRes.message);
+      navigate("/login");
+    } else {
+      alert("Email id is already register !!");
+    }
   };
 
   const handleOnChange = (e) => {

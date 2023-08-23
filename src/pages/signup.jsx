@@ -30,12 +30,12 @@ const signup = () => {
         },
         body: JSON.stringify(data),
       }
-    )
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-    // const dataRes = await fetchData.json();
-
-    alert(data.message);
+    );
+    // .then((response) => response.json())
+    // .catch((err) => console.log(err));
+    const dataRes = await fetchData.json();
+    console.log(dataRes);
+    alert(dataRes.message);
     navigate("/login");
   };
 

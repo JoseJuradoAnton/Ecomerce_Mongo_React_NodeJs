@@ -11,7 +11,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  console.log(data);
+  // console.log(data);
 
   const handleShowPassword = () => {
     setShowPassword((preve) => !preve);

@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import UserIcon from "../assets/user-icon.png";
 import { Link } from "react-router-dom";
 import { BiShow, BiHide } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
   });
@@ -15,6 +14,32 @@ const Login = () => {
 
   const handleShowPassword = () => {
     setShowPassword((preve) => !preve);
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const fetchData = await fetch(
+      `${import.meta.env.VITE_REACT_APP_SERVER_DOMAIN}login`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    const dataRes = await fetchData.json();
+
+    if (dataRes.message) {
+      alert("Wrong user or password");
+    } else {
+      alert("Login SuccessFully");
+      navigate("/home");
+    }
   };
 
   const handleOnChange = (e) => {
@@ -35,7 +60,7 @@ const Login = () => {
           <img src={UserIcon} alt="" />
         </div>
 
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
           <input
             type={"email"}

@@ -18,6 +18,7 @@ const signup = () => {
   };
 
   console.log(import.meta.env.VITE_REACT_APP_SERVER_DOMAIN);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -31,8 +32,7 @@ const signup = () => {
         body: JSON.stringify(data),
       }
     );
-    // .then((response) => response.json())
-    // .catch((err) => console.log(err));
+
     const dataRes = await fetchData.json();
     console.log(dataRes);
     if (dataRes.id) {

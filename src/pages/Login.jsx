@@ -3,6 +3,8 @@ import UserIcon from "../assets/user-icon.png";
 import { Link } from "react-router-dom";
 import { BiShow, BiHide } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRedux } from "../redux/userSlice";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -10,7 +12,10 @@ const Login = () => {
     email: "",
     password: "",
   });
-  // console.log(data);
+
+  const userData = useSelector((state) => state);
+
+  const dispatch = useDispatch();
 
   const handleShowPassword = () => {
     setShowPassword((preve) => !preve);
@@ -35,8 +40,11 @@ const Login = () => {
     const dataRes = await fetchData.json();
 
     if (dataRes.message) {
+      dispatch(loginRedux(dataRes));
       alert("Wrong user or password");
     } else {
+      dispatch(loginRedux(dataRes));
+
       alert("Login SuccessFully");
       navigate("/home");
     }

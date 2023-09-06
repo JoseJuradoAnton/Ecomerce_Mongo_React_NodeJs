@@ -3,13 +3,24 @@ import logo from "../assets/logo-jc1.png";
 import { Link } from "react-router-dom";
 import { BiSolidUser } from "react-icons/bi";
 import { BsFillCartCheckFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutRedux } from "../redux/userSlice";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const userData = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  console.log(userData.userEmail);
 
   const handleShowMenu = () => {
     setShowMenu((preve) => !preve);
   };
+
+  const handleLogout = () => {
+    dispatch(logoutRedux());
+  };
+
+  console.log(import.meta.env.VITE_REACT_APP_ADMIN_EMAIL);
 
   return (
     <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50">
@@ -24,7 +35,7 @@ const Header = () => {
 
         <div className="flex items-center gap-4 md:gap-7">
           <nav className="flex gap-4 md:gap-6 text-base md:text-lg">
-            <Link to={""}>Home</Link>
+            <Link to={"home"}>Home</Link>
             <Link to={"menu"}>Menu</Link>
             <Link to={"about"}>about</Link>
             <Link to={"contact"}>Contact</Link>
@@ -40,20 +51,40 @@ const Header = () => {
               className="border-2 border-solid border-slate-600 p-1 rounded-full"
               onClick={handleShowMenu}
             >
-              <BiSolidUser />
+              {userData.firstName ? (
+                <h1>{userData.firstName}</h1>
+              ) : (
+                <BiSolidUser />
+              )}
             </div>
 
             {showMenu && (
               <div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col">
-                <Link
-                  to={"newproduct"}
-                  className="whitespace-nowrap cursor-pointer"
-                >
-                  New product
-                </Link>
-                <Link to={"login"} className="whitespace-nowrap cursor-pointer">
-                  Login
-                </Link>
+                {userData.userEmail ===
+                  import.meta.env.VITE_REACT_APP_ADMIN_EMAIL && (
+                  <Link
+                    to={"newproduct"}
+                    className="whitespace-nowrap cursor-pointer px-2"
+                  >
+                    New product
+                  </Link>
+                )}
+
+                {userData.firstName ? (
+                  <p
+                    className="cursor-pointer text-white px-2 bg-red-500"
+                    onClick={handleLogout}
+                  >
+                    Logout({userData.firstName}){}
+                  </p>
+                ) : (
+                  <Link
+                    to={"login"}
+                    className="whitespace-nowrap cursor-pointer text-white bg-red-500"
+                  >
+                    Login
+                  </Link>
+                )}
               </div>
             )}
           </div>

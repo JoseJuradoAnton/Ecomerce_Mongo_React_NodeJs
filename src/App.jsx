@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./component/Header";
 import { Outlet } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const App = () => {
+  const dispatch = useDispatch();
+  const productData = useSelector((state) => state.product);
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(
+        `${import.meta.env.VITE_REACT_APP_SERVER_DOMAIN}product`
+      );
+      const resData = await res.json();
+      console.log(resData);
+    })();
+  }, []);
+
+  console.log(productData);
+
   return (
     <div className="">
       <Header />

@@ -10,7 +10,6 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const userData = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  console.log(userData.userEmail);
 
   const handleShowMenu = () => {
     setShowMenu((preve) => !preve);
@@ -20,7 +19,7 @@ const Header = () => {
     dispatch(logoutRedux());
   };
 
-  console.log(import.meta.env.VITE_REACT_APP_ADMIN_EMAIL);
+
 
   return (
     <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50">

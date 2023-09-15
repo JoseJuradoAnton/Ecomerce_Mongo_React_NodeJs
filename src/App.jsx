@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import Header from "./component/Header";
-import { Outlet } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import {Outlet} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {setDataProduct} from "./redux/productSlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -14,10 +15,9 @@ const App = () => {
       );
       const resData = await res.json();
       console.log(resData);
+      dispatch(setDataProduct(resData));
     })();
   }, []);
-
-  console.log(productData);
 
   return (
     <div className="">

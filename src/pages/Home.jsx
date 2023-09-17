@@ -1,10 +1,15 @@
 import React from "react";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import HomeCard from "../component/HomeCard";
+import CardFeature from "../component/CardFeature";
 
 const Home = () => {
-const productData = useSelector((state) => state.product.productList);
-console.log(productData)
+  const productData = useSelector((state) => state.product.productList);
+  console.log(productData)
+  const homeCardList = productData?.filter(el => el.category === "PC", [])
+  console.log(homeCardList)
+
+  const loadingArragy = new Array(4).fill(null)
 
   return (
     <div className="p-2 md:p-4">
@@ -17,9 +22,9 @@ console.log(productData)
               className="h-7"
             />
           </div>
-          <h2 className="text-4xl font-bold">
+          <h2 className="text-4xl md:text-5xl font-bold">
             Venta de equipo informaticos
-            <span className="text-red-600"> Desarrolles</span>
+            <span className="text-red-600"> JoseCode/  </span>
           </h2>
 
           <p className="py-3 text-base">
@@ -35,18 +40,41 @@ console.log(productData)
           </button>
         </div>
 
-        <div className="md:w-1/2 flex flex-wrap gap-5">
+        <div className="md:w-1/2 flex flex-wrap gap-5 p-4 justify-center">
           {
-            productData?.map((el) =>{
-              return(
+            productData?.map((el) => {
+              return (
                 <HomeCard
-                key={el._id}
-                name={el.name}
-                image={el.image}
-                price={el.price}
-                category={el.category}
+                  key={el._id}
+                  name={el.name}
+                  image={el.image}
+                  price={el.price}
+                  category={el.category}
                 />
               )
+
+            })
+          }
+
+        </div>
+      </div>
+      <div className="">
+        <h2 className="font-bold text-2xl text-slate-600">Fresh</h2>
+        <div className="flex gap-5">
+          {
+            homeCardList?.map(el => {
+              return (
+
+                <CardFeature
+                  key={el._id}
+                  name={el.name}
+                  price={el.price}
+                  image={el.image}
+                  category={el.category}
+
+                />
+              )
+
             })
           }
         </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import HomeCard from "../component/HomeCard";
 import CardFeature from "../component/CardFeature";
+import { GrPrevious, GrNext } from "react-icons/gr"
 
 const Home = () => {
   const productData = useSelector((state) => state.product.productList);
@@ -35,7 +36,7 @@ const Home = () => {
             cupiditate eius nihil porro ea rerum numquam at aut molestiae,
             incidunt possimus beatae quo atque nostrum vero minus quis.
           </p>
-          <button className="font-bold bg-red-500 text-slate-200 px-4 py-2 rounded-md">
+          <button className="font-bold bg-violet-700 text-slate-200 px-4 py-2 rounded-md">
             Order Now
           </button>
         </div>
@@ -59,8 +60,14 @@ const Home = () => {
         </div>
       </div>
       <div className="">
-        <h2 className="font-bold text-2xl text-slate-600">Fresh</h2>
-        <div className="flex gap-5">
+        <div className="flex w-full items-center">
+          <h2 className="font-bold text-2xl text-slate-800 mb-4">Fresh</h2>
+          <div className="ml-auto flex gap-4">
+            <button className="bg-slate-300 hover:bg-slate-400 text-lg"><GrPrevious /></button>
+            <button className="bg-slate-300 hover:bg-slate-400 text-lg"><GrNext /></button>
+          </div>
+        </div>
+        <div className="flex gap-5 overflow-scroll">
           {
             homeCardList?.map(el => {
               return (
@@ -78,6 +85,11 @@ const Home = () => {
             })
           }
         </div>
+      </div>
+      <div className="my-5">
+        <h2 className="font-bold text-2xl text-slate-800 mb-4">
+          Your Product
+        </h2>
       </div>
     </div>
   );

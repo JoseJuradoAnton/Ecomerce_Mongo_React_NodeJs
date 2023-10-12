@@ -58,32 +58,38 @@ const Header = () => {
             </div>
 
             {showMenu && (
-              <div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col">
+              <div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col min-w-[120px] ">
                 {userData.userEmail ===
                   import.meta.env.VITE_REACT_APP_ADMIN_EMAIL && (
-                  <Link
-                    to={"newproduct"}
-                    className="whitespace-nowrap cursor-pointer px-2"
-                  >
-                    New product
-                  </Link>
-                )}
+                    <Link
+                      to={"newproduct"}
+                      className="whitespace-nowrap cursor-pointer px-2"
+                    >
+                      New product
+                    </Link>
+                  )}
 
                 {userData.firstName ? (
                   <p
                     className="cursor-pointer text-white px-2 bg-red-500"
                     onClick={handleLogout}
                   >
-                    Logout({userData.firstName}){}
+                    Logout({userData.firstName}){ }
                   </p>
                 ) : (
                   <Link
                     to={"login"}
-                    className="whitespace-nowrap cursor-pointer text-white bg-red-500"
+                    className="whitespace-nowrap cursor-pointer px-2"
                   >
                     Login
                   </Link>
                 )}
+                <nav className="text-base md:text-lg flex flex-col">
+                  <Link to={""} className="px-2 py-1" >Home</Link>
+                  <Link to={"menu"} className="px-2 py-1">Menu</Link>
+                  <Link to={"about"} className="px-2 py-1">about</Link>
+                  <Link to={"contact"} className="px-2 py-1">contact</Link>
+                </nav>
               </div>
             )}
           </div>

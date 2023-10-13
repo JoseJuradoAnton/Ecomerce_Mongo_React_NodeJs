@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import HomeCard from "../component/HomeCard";
 import CardFeature from "../component/CardFeature";
 import { GrPrevious, GrNext } from "react-icons/gr"
+import FilterProduct from "../component/FilterProduct";
 
 const Home = () => {
   const productData = useSelector((state) => state.product.productList);
-  console.log(productData)
+
   const homeCardList = productData?.filter(el => el.category === "PC", [])
-  console.log(homeCardList)
+
 
   const loadingArragy = new Array(4).fill(null)
 
+  const categoryList = [...new Set(productData?.map(el => el.category))]
+
+  console.log(categoryList)
+
+  const [filterby, setFilterBy] = useState("")
   return (
     <div className="p-2 md:p-4">
       <div className="md:flex">
@@ -90,6 +96,19 @@ const Home = () => {
         <h2 className="font-bold text-2xl text-slate-800 mb-4">
           Your Product
         </h2>
+        <div className="flex gap-4 justify-center">
+          {
+            categoryList[0] && categoryList.map(el => (
+
+              <FilterProduct
+
+                category={el}
+              />
+
+            ))
+          }
+
+        </div>
       </div>
     </div>
   );

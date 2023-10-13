@@ -1,7 +1,7 @@
 import React from 'react'
 
 const homeCard = ({ name, image, category, price }) => {
-    console.log(homeCard)
+
     return (
         <div className='bg-gray-300 shadow-md p-2 rounded min-w-[150px] '>
             {name && <>

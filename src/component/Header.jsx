@@ -58,7 +58,7 @@ const Header = () => {
             </div>
 
             {showMenu && (
-              <div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col min-w-[120px] ">
+              <div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col min-w-[120px] text-center">
                 {userData.userEmail ===
                   import.meta.env.VITE_REACT_APP_ADMIN_EMAIL && (
                     <Link
@@ -84,7 +84,7 @@ const Header = () => {
                     Login
                   </Link>
                 )}
-                <nav className="text-base md:text-lg flex flex-col">
+                <nav className="text-base md:text-lg flex flex-col md:hidden">
                   <Link to={""} className="px-2 py-1" >Home</Link>
                   <Link to={"menu"} className="px-2 py-1">Menu</Link>
                   <Link to={"about"} className="px-2 py-1">about</Link>

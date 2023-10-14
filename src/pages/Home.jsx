@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import HomeCard from "../component/HomeCard";
 import CardFeature from "../component/CardFeature";
@@ -17,7 +17,8 @@ const Home = () => {
 
   console.log(categoryList)
 
-  const [filterby, setFilterBy] = useState("")
+
+
   return (
     <div className="p-2 md:p-4">
       <div className="md:flex">
@@ -98,10 +99,10 @@ const Home = () => {
         </h2>
         <div className="flex gap-4 justify-center">
           {
-            categoryList[0] && categoryList.map(el => (
+            categoryList?.map((el) => (
 
               <FilterProduct
-
+                key={el.length}
                 category={el}
               />
 
